@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Courses info</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 20px;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+            }
+
+            th, td {
+                padding: 10px;
+                text-align: left;
+            }
+
+            #student-info {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Search for student grades</h1>
+        <label for="code">Student Code:</label>
+        <input type="text" id="code" placeholder="Here your code">
+        <button onclick="buscarEstudiante()">Search</button>
+
+        <table id="student-info">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>T1</th>
+                    <th>Lab2</th>
+                    <th>Lab3</th>
+                    <th>Lab3P</th>
+                    <th>Eval Pts</th>
+                    <th>Eval N</th>
+                    <th>EIE</th>
+                    <th>Bonus</th>
+                    <th>Def</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="code-cell"></td>
+                    <td id="t1-cell"></td>
+                    <td id="lab2-cell"></td>
+                    <td id="lab3-cell"></td>
+                    <td id="lab3p-cell"></td>
+                    <td id="eval_pts-cell"></td>
+                    <td id="eval_n-cell"></td>
+                    <td id="eie-cell"></td>
+                    <td id="bonus-cell"></td>
+                    <td id="def-cell"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script>
+            async function buscarEstudiante() {
+            // Obtener el código ingresado por el usuario
+            const codigo = document.getElementById('code').value;
+
+            try {
+                // Cargar el archivo JSON
+                const response = await fetch('data_1.json');
+
+                // Verificar si el archivo se cargó correctamente
+                if (!response.ok) {
+                    throw new Error('No se pudo cargar el archivo JSON');
+                }
+
+                const data = await response.json();
+
+                // Verifica el contenido del JSON en la consola
+                console.log('Datos cargados del JSON:', data);
+
+                // Buscar el código dentro del objeto JSON "data"
+                const estudiante = data.find(est => est.code === codigo);
+
+                // Verificar si el estudiante fue encontrado
+                if (estudiante) {
+                    console.log('Estudiante encontrado:', estudiante);
+
+                    // Mostrar la tabla con la información del estudiante
+                    document.getElementById('student-info').style.display = 'table';
+
+                    // Llenar los datos en la tabla
+                    document.getElementById('code-cell').textContent = estudiante.code;
+                    document.getElementById('t1-cell').textContent = estudiante.t1;
+                    document.getElementById('lab2-cell').textContent = estudiante.lab2;
+                    document.getElementById('lab3-cell').textContent = estudiante.lab3;
+                    document.getElementById('lab3p-cell').textContent = estudiante.lab3p;
+                    document.getElementById('eval_pts-cell').textContent = estudiante.eval_pts;
+                    document.getElementById('eval_n-cell').textContent = estudiante.eval_n;
+                    document.getElementById('eie-cell').textContent = estudiante.eie;
+                    document.getElementById('bonus-cell').textContent = estudiante.bonus;
+                    document.getElementById('def-cell').textContent = estudiante.def;
+                } else {
+                    console.log('Estudiante no encontrado');
+                    alert('Estudiante no encontrado.');
+                    document.getElementById('student-info').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error al buscar el estudiante:', error);
+                alert('Error al cargar o procesar el archivo JSON.');
+            }
+        }
+        </script>
+    </body>
+</html>

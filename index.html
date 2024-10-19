@@ -97,7 +97,7 @@
 
                 // Verificar si el estudiante fue encontrado
                 if (estudiante) {
-                    console.log('Estudiante encontrado:', estudiante);
+                    console.log('Student not found:', estudiante);
 
                     // Mostrar la tabla con la información del estudiante
                     document.getElementById('student-info').style.display = 'table';
@@ -114,13 +114,13 @@
                     document.getElementById('bonus-cell').textContent = formatValue(estudiante.bonus);
                     document.getElementById('def-cell').textContent = formatValue(estudiante.def);
                 } else {
-                    console.log('Estudiante no encontrado');
-                    alert('Estudiante no encontrado.');
+                    console.log('Student not found');
+                    alert('Student not found.');
                     document.getElementById('student-info').style.display = 'none';
                 }
             } catch (error) {
-                console.error('Error al buscar el estudiante:', error);
-                alert('Error al cargar o procesar el archivo JSON.');
+                console.error('Error searching for student:', error);
+                alert('Error loading data.');
             }
         }
         </script>

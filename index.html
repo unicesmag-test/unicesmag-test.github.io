@@ -68,6 +68,12 @@
         </table>
 
         <script>
+
+            // Función para formatear los valores y agregar .0 si es un número entero
+            function formatValue(value) {
+                return Number.isInteger(value) ? value.toFixed(1) : value;
+            }
+
             async function buscarEstudiante() {
             // Obtener el código ingresado por el usuario
             const codigo = document.getElementById('code').value;
@@ -98,15 +104,15 @@
 
                     // Llenar los datos en la tabla
                     document.getElementById('code-cell').textContent = estudiante.code;
-                    document.getElementById('t1-cell').textContent = estudiante.t1;
-                    document.getElementById('lab2-cell').textContent = estudiante.lab2;
-                    document.getElementById('lab3-cell').textContent = estudiante.lab3;
-                    document.getElementById('lab3p-cell').textContent = estudiante.lab3p;
-                    document.getElementById('eval_pts-cell').textContent = estudiante.eval_pts;
-                    document.getElementById('eval_n-cell').textContent = estudiante.eval_n;
-                    document.getElementById('eie-cell').textContent = estudiante.eie;
-                    document.getElementById('bonus-cell').textContent = estudiante.bonus;
-                    document.getElementById('def-cell').textContent = estudiante.def;
+                    document.getElementById('t1-cell').textContent = formatValue(estudiante.t1);
+                    document.getElementById('lab2-cell').textContent = formatValue(estudiante.lab2);
+                    document.getElementById('lab3-cell').textContent = formatValue(estudiante.lab3);
+                    document.getElementById('lab3p-cell').textContent = formatValue(estudiante.lab3p);
+                    document.getElementById('eval_pts-cell').textContent = formatValue(estudiante.eval_pts);
+                    document.getElementById('eval_n-cell').textContent = formatValue(estudiante.eval_n);
+                    document.getElementById('eie-cell').textContent = formatValue(estudiante.eie);
+                    document.getElementById('bonus-cell').textContent = formatValue(estudiante.bonus);
+                    document.getElementById('def-cell').textContent = formatValue(estudiante.def);
                 } else {
                     console.log('Estudiante no encontrado');
                     alert('Estudiante no encontrado.');
